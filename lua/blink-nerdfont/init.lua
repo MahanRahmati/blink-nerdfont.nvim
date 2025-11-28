@@ -26,6 +26,7 @@ function M.new(opts)
 	local self = setmetatable({}, { __index = M })
 	config = vim.tbl_deep_extend("keep", opts or {}, {
 		insert = true,
+    trigger = ":",
 	})
 	if not nerdfont_items then
 		nerdfont_items = require("blink-nerdfont.items").get()
@@ -36,9 +37,10 @@ end
 ---@param context blink.cmp.Context
 function M:get_completions(context, callback)
 	local task = async.task.empty():map(function()
+		local trigger = self:get_trigger_characters()
 		local is_char_trigger = vim.list_contains(
-			self:get_trigger_characters(),
-			context.line:sub(context.bounds.start_col - 1, context.bounds.start_col - 1)
+      trigger,
+			context.line:sub(context.bounds.start_col - string.len(trigger[1]), context.bounds.start_col - 1)
 		)
 		callback({
 			is_incomplete_forward = true,
@@ -63,7 +65,7 @@ function M:resolve(item, callback)
 end
 
 function M:get_trigger_characters()
-	return { ":" }
+  return { config.trigger }
 end
 
 return M
