@@ -4,7 +4,7 @@ A nerd font source for [blink.cmp](https://github.com/Saghen/blink.cmp).
 
 ## 🎨 Features
 
-- Trigger on colon `:`.
+- Custom trigger, default to colon (`:`).
 - Ghost text completion support.
 
 ## 🔨 Installation
@@ -28,7 +28,10 @@ A nerd font source for [blink.cmp](https://github.com/Saghen/blink.cmp).
           module = "blink-nerdfont",
           name = "Nerd Fonts",
           score_offset = 15, -- Tune by preference
-          opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
+          opts = {
+            insert = true, -- Insert nerdfont icon (default) or complete its name
+            trigger = ":-)" -- Customize the trigger. Defaults to ":"
+          },
         }
       }
     }
@@ -38,7 +41,7 @@ A nerd font source for [blink.cmp](https://github.com/Saghen/blink.cmp).
 
 ## 📘 Usage
 
-Press `:`.
+Write your trigger. (Default `:`).
 
 ## 💪 Credit
 
